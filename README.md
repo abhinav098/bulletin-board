@@ -1,11 +1,12 @@
 
-## Available Scripts
+## Bulletin Board
 
 #Inital setup
+
 In the project directory, you can run:
 
 ```
-  git clone <this repo link>
+  git clone https://github.com/abhinav098/bulletin-board
   yarn install
   yarn start
 ```
