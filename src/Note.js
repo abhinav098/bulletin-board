@@ -10,6 +10,14 @@ class Note extends Component{
     editing: false
   }
 
+  componentDidUpdate(){
+    var textarea
+    if (this.state.editing) {
+      textarea = this._newText
+      textarea.focus()
+      textarea.select()
+    }
+  }
   // Other way of binding the methods and defining state
 
   // constructor(props){
@@ -38,7 +46,8 @@ class Note extends Component{
   renderForm = () => {
     return <div className="note" style={this.style}>
       <form onSubmit={this.save}>
-          <textarea ref={input => this._newText = input}/>
+          <textarea ref={input => this._newText = input}
+          defaultValue={this.props.children}/>
           <button id="save">
             <FaSave />
           </button>
@@ -47,7 +56,6 @@ class Note extends Component{
   }
 
   save = (e) => {
-    debugger
     e.preventDefault();
     this.props.onChange(this._newText.value, this.props.index);
     this.setState({
