@@ -11,12 +11,26 @@ class Note extends Component{
   }
 
   componentDidUpdate(){
+    console.log('component Updated')
     var textarea
     if (this.state.editing) {
       textarea = this._newText
       textarea.focus()
       textarea.select()
     }
+  }
+
+  componentWillMount(){
+    this.style = {
+      right: this.randomBetween(0, window.innerWidth - 150 , 'px'),
+      top: this.randomBetween(0, window.innerHeight - 150, 'px'),
+      transform: `rotate(${this.randomBetween(-25, 25, 'deg')})`
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    let shouldUpdate = this.props.children !== nextProps.children || this.state !== nextState
+    return shouldUpdate
   }
   // Other way of binding the methods and defining state
 
@@ -31,13 +45,6 @@ class Note extends Component{
   //  this.renderForm = this.renderForm.bind(this);
   // }
 
-  componentWillMount(){
-    this.style = {
-      right: this.randomBetween(0, window.innerWidth - 150 , 'px'),
-      top: this.randomBetween(0, window.innerHeight - 150, 'px'),
-      transform: `rotate(${this.randomBetween(-25, 25, 'deg')})`
-    }
-  }
 
   edit = () => {
     this.setState({ editing: true });
