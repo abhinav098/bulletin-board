@@ -23,12 +23,20 @@ class Note extends Component{
   //  this.renderForm = this.renderForm.bind(this);
   // }
 
+  componentWillMount(){
+    this.style = {
+      right: this.randomBetween(0, window.innerWidth - 150 , 'px'),
+      top: this.randomBetween(0, window.innerHeight - 150, 'px'),
+      transform: `rotate(${this.randomBetween(-25, 25, 'deg')})`
+    }
+  }
+
   edit = () => {
     this.setState({ editing: true });
   }
 
   renderForm = () => {
-    return <div className="note">
+    return <div className="note" style={this.style}>
       <form onSubmit={this.save}>
           <textarea ref={input => this._newText = input}/>
           <button id="save">
@@ -51,8 +59,15 @@ class Note extends Component{
     this.props.onRemove(this.props.index);
   }
 
+  randomBetween = (x, y, s) => {
+    return x + Math.ceil(Math.random() * (y-x)) + s
+  }
+
   renderDisplay = () => {
-    return (<div className="note">
+    return ( < div className = "note"
+        style = {
+          this.style
+        } >
         <p>{this.props.children}</p>
         <span>
           <button id="edit" onClick={ this.edit }>
